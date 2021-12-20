@@ -13,13 +13,15 @@ B-Sortear um Codigo
 C-Ler uma Tentativa, caso esta sequência não seja válida, o programa irá solicitar ao utilizador uma nova combinação.
 (FEITO)
 
-D- Após cada jogada será impresso na consola o estado do atual tabuleiro (FALTA)
+D- Após cada jogada será impresso na consola o estado do atual tabuleiro (FEITO)
+
 
 E-A validação da combinação é automática sendo apresentado o número de cores 
-corretas  numa  posição  certa (FEITO),  e  o  número  de  cores  corretas  nas  posições  erradas. 
+corretas  numa  posição  certa ,  e  o  número  de  cores  corretas  nas  posições  erradas. 
 Atenção, que esta validação nunca deve indicar qual é a cor correta e a sua posição (cf. 
 Regras do Mastermind). 
-(FALTA)
+(FEITO)
+
 
 F-O  jogo  termina  caso  o  utilizador  tenha  acertado  na  combinação  correta  (i.e., 
 cores + ordenação), ou caso este tenha esgotado as 10 linhas de combinações possíveis. 
