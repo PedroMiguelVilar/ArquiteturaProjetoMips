@@ -3,7 +3,10 @@
 Trabalho de Arquitetura de computadores 2021/2022
 
 Developed by: - Pedro & Nuno Industries
-               
+         
+         
+----------------------------------------------------------------------1FASE------------------------------------------------------------------------------------------------------
+         
 A-Fazer Matriz 
 (FEITO)
 
@@ -44,3 +47,31 @@ aplicação.
 
 I-A aplicação será finalizada quando a tecla ‘e’ for executada, após ter finalizado uma partida 
 (FEITO)
+         
+----------------------------------------------------------------------2FASE------------------------------------------------------------------------------------------------------
+
+
+A.  (40 pontos) Na  segunda  fase  o  tabuleiro  será  composto  por  uma  dimensão  flexível.  O 
+número  de  células  será  inicialmente  definido  pelo  utilizador,  i.e.,  M  colunas  e  N  linhas 
+(4<=M & 2<=N). Onde M corresponde a dimensão da sequência de cores, quanto maior 
+o número for, maior terá de ser a senha inserida e a respetiva validação; e N corresponde 
+ao número de jogadas disponíveis para tentar adivinhar a sequência correta. 
+(FEITO)
+
+B.  (30 pontos) Será possível redefinir o alfabeto usado na sequência, i.e, pode ser adicionado 
+ou removidas novas siglas as seis indicadas na alínea I.A. Por exemplo, a nova sequência 
+poderá  ser:  ABCDEFGHIJ  (não  poderão  existir  caracteres  duplicados!).  A  geração 
+aleatória  da  nova  sequência  deverá  contemplar  os  elementos  desse  alfabeto.  As 
+combinações inseridas pelo jogador irão também usar elementos deste mesmo alfabeto. 
+A parametrização do alfabeto, a semelhança da alínea anterior só pode ser feita no início 
+do jogo.
+(FALTA)
+ 
+C.  (20 pontos) O  programa  deve  ser  capaz,  usando  o  Bitmap  display,  de  gerar  a  grelha  de 
+dimensão MxN. Deve desenhar e apresentar a sequência de cores de cada jogador nesta 
+mesma  grelha.  Caso  o  alfabeto  de  cores  tenha  sido  alterado  (alínea  anterior  -  II.B), 
+poderão  colocar  uma  cor  aleatória  da  vossa  escolha  para  cada  um  dos  símbolos. 
+Relembro que no jogo original é assinalada as peças com cor correta na posição certa 
+com cor vermelhas (uma por cada), peças com cor correta mas em posição erradas com 
+cor branca (uma por cada).
+(FALTA)
