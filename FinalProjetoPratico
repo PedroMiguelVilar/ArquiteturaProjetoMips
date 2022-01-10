@@ -152,7 +152,7 @@ LOOP_GAME:
 LOOP_RANDOM:
 	beq $t0, $t2, CHECK_REPEATED_CODE
 
-	li $a1, 6
+	li $a1, 24
 	li $v0, 42         		 # Service 42, random int
 	syscall           		 # Generate random int (returns in $a0)
 
