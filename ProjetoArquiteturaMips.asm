@@ -3,14 +3,38 @@
 #CODE GENERATOR
 
 ### WORD BANK ###
-BLUE:     .byte 'B'
-GREEN:    .byte 'G'
-ORANGE:   .byte 'O'
-WHITE:    .byte 'W'
-YELLOW:   .byte 'Y'
-RED:      .byte 'R'
+A: .byte 'A'
+B: .byte 'B'
+C: .byte 'C'
+D: .byte 'D'
+E: .byte 'E'
+F: .byte 'F'
+G: .byte 'G'
+H: .byte 'H'
+I: .byte 'I'
+J: .byte 'J'
+K: .byte 'K'
+L: .byte 'L'
+M: .byte 'M'
+N: .byte 'N'
+O: .byte 'O'
+P: .byte 'P'
+Q: .byte 'Q'
+R: .byte 'R'
+S: .byte 'S'
+T: .byte 'T'
+U: .byte 'U'
+V: .byte 'V'
+W: .byte 'W'
+X: .byte 'X'
+Y: .byte 'Y'
+Z: .byte 'Z'
+
 
 CODE: .space 400
+CODE_2: .space 400
+
+CODE_MSG_2: .asciiz "Quais as letras para o novo codigo:"
 
 MSG1: .asciiz "O Codigo e: "
 MSG3: .asciiz "O Codigo era: "
@@ -72,7 +96,41 @@ main:
 
 	li $s5, 0
 
-	j NUMBER_DIGITS_CODE
+	j ASK_CHARS_STRING
+	
+
+ASK_CHARS_STRING:
+	
+	li $v0, 4                		# printf("\n")
+	la $a0, CODE_MSG_2
+	syscall
+	
+	
+	li $v0, 4                		# printf("\n")
+	la $a0, NewLine
+	syscall
+
+         li $v0,8 #take in input
+         la $a0, CODE_2 #load byte space into address
+         li $a1, 20 # allot the byte space for string
+         syscall
+         move $t1, $a0
+         li $t5, -1
+         
+SIZE_CHARS_STRING:
+	lb $t2, 0($t1)
+	
+	beq $t2, $0, SIZE_CHARS_STRING_RESET
+
+	addi $t5, $t5, 1
+	addi $t1, $t1, 1
+	
+	j SIZE_CHARS_STRING
+	
+SIZE_CHARS_STRING_RESET:
+	li $t0, 0
+	li $t1, 0
+	li $t2, 0
 	
 NUMBER_DIGITS_CODE:
 
@@ -131,76 +189,519 @@ LOOP_GAME:
 LOOP_RANDOM:
 	beq $t0, $t2, CHECK_REPEATED_CODE
 
-	li $a1, 6
+	li $a1, 24
 	li $v0, 42         		 # Service 42, random int
 	syscall           		 # Generate random int (returns in $a0)
+	
+	la $t8, CODE_2
+	li $t6, 0
 
-	beq $a0, 0, CBLUE		 #Switch (valor)
-	beq $a0, 1, CGREEN
-	beq $a0, 2, CORANGE
-	beq $a0, 3, CWHITE
-	beq $a0, 4, CYELLOW
-	beq $a0, 5, CRED
+	beq $a0, 0, COLORA		 #Switch (valor)
+	beq $a0, 1, COLORB
+	beq $a0, 2, COLORC
+	beq $a0, 3, COLORD
+	beq $a0, 4, COLORE
+	beq $a0, 5, COLORF
+	beq $a0, 6, COLORG
+	beq $a0, 7, COLORH
+	beq $a0, 8, COLORI
+	beq $a0, 9, COLORJ
+	beq $a0, 10, COLORK
+	beq $a0, 11, COLORL
+	beq $a0, 12, COLORM
+	beq $a0, 13, COLORN
+	beq $a0, 14, COLORO
+	beq $a0, 15, COLORP
+	beq $a0, 16, COLORQ
+	beq $a0, 17, COLORR
+	beq $a0, 18, COLORS
+	beq $a0, 19, COLORT
+	beq $a0, 20, COLORU
+	beq $a0, 21, COLORV
+	beq $a0, 21, COLORW
+	beq $a0, 22, COLORX
+	beq $a0, 23, COLORY
+	beq $a0, 24, COLORZ
+	
+	j LOOP_RANDOM
+	
+LOOP_INPUT_ON_CODE:
+
+	lb $t1, 0($a2)
+	la $a1, CODE
+	add $a1, $a1, $t0
+	sb $t1, 0($a1)
+
+	addi $t0, $t0 ,1
+
+	j LOOP_RANDOM
+	
+  COLORA:
   
-CBLUE:
-	la $a0, BLUE
-	lb $t1, 0($a0)
-	la $a0, CODE
-	add $a0, $a0, $t0
-	sb $t1, 0($a0)
+        beq $t6, $t5,  LOOP_RANDOM
+  
+	lb $a0, A
+	
+	lb $t7, 0($t8)
+	
+	la $a2, A
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+	
+	j COLORA
 
-	addi $t0, $t0 ,1  
-	j LOOP_RANDOM
+COLORB:   
 
-CGREEN:   
-	la $a0, GREEN
-	lb $t1, 0($a0)
-	la $a0, CODE
-	add $a0, $a0, $t0
-	sb $t1, 0($a0)
+	beq $t6, $t5,  LOOP_RANDOM
 
-	addi $t0, $t0 ,1
-	j LOOP_RANDOM
+	la $a3, B
+	
+	lb $a0, 0($a3)
+	
+	lb $t7, 0($t8)
+	
+	la $a2, B
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+	
+	j COLORB
 
-CORANGE:  
-	la $a0, ORANGE
-	lb $t1, 0($a0)
-	la $a0, CODE
-	add $a0, $a0, $t0
-	sb $t1, 0($a0)
+COLORC:  
 
-	addi $t0, $t0 ,1
-	j LOOP_RANDOM
+	beq $t6, $t5,  LOOP_RANDOM
 
-CWHITE:  
-	la $a0, WHITE
-	lb $t1, 0($a0)
-	la $a0, CODE
-	add $a0, $a0, $t0
-	sb $t1, 0($a0)
+	lb $a0, C
+	
+	lb $t7, 0($t8)
+	
+	la $a2, C
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
 
-	addi $t0, $t0 ,1
-	j LOOP_RANDOM
+	
+	j COLORC
 
-CYELLOW:  
-	la $a0, YELLOW
-	lb $t1, 0($a0)
-	la $a0, CODE
-	add $a0, $a0, $t0
-	sb $t1, 0($a0)
+COLORD:  
 
-	addi $t0, $t0 ,1
-	j LOOP_RANDOM
+	beq $t6, $t5,  LOOP_RANDOM
 
-CRED:
-	la $a0, RED
-	lb $t1, 0($a0)
-	la $a0, CODE
-	add $a0, $a0, $t0
-	sb $t1, 0($a0)
+	lb $a0, D
+	
+	lb $t7, 0($t8)
+	
+	la $a2, D
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
 
-	addi $t0, $t0 ,1
-	j LOOP_RANDOM
+	j COLORD
+
+COLORE:  
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, E
+	
+	lb $t7, 0($t8)
+	
+	la $a2, E
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	j COLORE
+
+COLORF:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, F
+	
+	lb $t7, 0($t8)
+	
+	la $a2, F
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORF
+
+COLORG:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, G
+	
+	lb $t7, 0($t8)
+	
+	la $a2, G
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORG
+
+COLORH:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, H
+	
+	lb $t7, 0($t8)
+	
+	la $a2, H
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORH
+
+COLORI:
+
+	beq $t6, $t5,  LOOP_RANDOM
+	
+	lb $a0, I
+
+	lb $t7, 0($t8)
+	
+	la $a2, I
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORI
+
+COLORJ:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, J
+	
+	lb $t7, 0($t8)
+	
+	la $a2, J
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORJ
+
+COLORK:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, K
+	
+	lb $t7, 0($t8)
+	
+	la $a2, K
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORK
+
+COLORL:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, L
+	
+	lb $t7, 0($t8)
+	
+	la $a2, L
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORL
+
+COLORM:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, M
+	
+	lb $t7, 0($t8)
+	
+	la $a2, M
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORM
+
+COLORN:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, N
+	
+	lb $t7, 0($t8)
+
+	la $a2, N
+			
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORN
+	
+COLORO:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, O
+	
+	lb $t7, 0($t8)
+	
+	la $a2, O
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORO
+
+COLORP:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, P
+	
+	lb $t7, 0($t8)
+	
+	la $a2, P
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+	
+	
+	j COLORP
+
+COLORQ:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, Q
+	
+	lb $t7, 0($t8)
+	
+	la $a2, Q
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORQ
+
+COLORR:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, R
+	
+	lb $t7, 0($t8)
+	
+	la $a2, R
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORR
+
+COLORS:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, S
+	
+	lb $t7, 0($t8)
+	
+	la $a2, S
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORS
+
+COLORT:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, T
+	
+	lb $t7, 0($t8)
+	
+	la $a2, T
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORZ
+
+COLORU:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, U
+	
+	lb $t7, 0($t8)
+	
+	la $a2, U
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORU
+
+COLORV:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, V
+	
+	lb $t7, 0($t8)
+	
+	la $a2, V
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORV
+
+COLORW:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, W
+	
+	lb $t7, 0($t8)
+	
+	la $a2, W
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+		
+	j COLORW
+
+COLORX:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, X
+	
+	lb $t7, 0($t8)
+	
+	la $a2, X
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORX
+	
+	
+COLORY:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, Y
+	
+	lb $t7, 0($t8)
+	
+	la $a2, Y
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORY
+	
+COLORZ:
+
+	beq $t6, $t5,  LOOP_RANDOM
+
+	lb $a0, Z
+	
+	lb $t7, 0($t8)
+	
+	la $a2, Z
+	
+	beq $a0, $t7, LOOP_INPUT_ON_CODE
+	
+	addi $t6, $t6, 1
+	addi $t8, $t8, 1
+
+	
+	j COLORZ
 
 CHECK_REPEATED_CODE:
 
@@ -233,8 +734,6 @@ CHECK_REPEATED_CODE_WHILE_2:
 
 	slt $t7, $t6, $t2   #t6<t2   $t6=j
 	beq $t7, $0, CHECK_REPEATED_CODE_BACK
-	
-
 	
 	lb      $t7,0($s2)
 	lb      $t9, 0($s3)
@@ -401,7 +900,8 @@ BOARD_PRINT_END_LINE :                		# printf("\n")
     
         addi $t0, $t0, 1                	# i++
     
-	beq $t0, 10, POINTS
+    	move $t5, $a3
+	beq $t0, $t5, POINTS
         
         j BOARD_PRINT_WHILE1
         
@@ -418,18 +918,58 @@ COMPARE_LOOP_GOOD:
 	beq $t6, $a2, START_COMPARE
 
 	lb $t8, ($s0)                   # get next char from TRIES
-	lb 	$t5, WHITE			 # they are valid
+	lb 	$t5, A			 # they are valid
 	beq     $t8, $t5, GOOD            
-	lb 	$t5, BLUE
+	lb 	$t5, B
 	beq     $t8, $t5, GOOD  
-	lb 	$t5, GREEN		
+	lb 	$t5, C		
 	beq     $t8, $t5, GOOD  
-	lb 	$t5, YELLOW	
+	lb 	$t5, D	
 	beq     $t8, $t5, GOOD  
-	lb 	$t5, ORANGE	
+	lb 	$t5, E	
 	beq     $t8, $t5, GOOD  
-	lb 	$t5, RED
-	beq     $t8, $t5, GOOD  
+	lb 	$t5, F
+	beq     $t8, $t5, GOOD
+	lb 	$t5, G
+	beq     $t8, $t5, GOOD
+	lb 	$t5, H
+	beq     $t8, $t5, GOOD
+	lb 	$t5, I
+	beq     $t8, $t5, GOOD
+	lb 	$t5, J
+	beq     $t8, $t5, GOOD
+	lb 	$t5, K
+	beq     $t8, $t5, GOOD
+	lb 	$t5, L
+	beq     $t8, $t5, GOOD
+	lb 	$t5, M
+	beq     $t8, $t5, GOOD
+	lb 	$t5, N
+	beq     $t8, $t5, GOOD
+	lb 	$t5, O
+	beq     $t8, $t5, GOOD
+	lb 	$t5, P
+	beq     $t8, $t5, GOOD
+	lb 	$t5, Q
+	beq     $t8, $t5, GOOD
+	lb 	$t5, R
+	beq     $t8, $t5, GOOD
+	lb 	$t5, S
+	beq     $t8, $t5, GOOD
+	lb 	$t5, T
+	beq     $t8, $t5, GOOD
+	lb 	$t5, U
+	beq     $t8, $t5, GOOD
+	lb 	$t5, V
+	beq     $t8, $t5, GOOD
+	lb 	$t5, W
+	beq     $t8, $t5, GOOD
+	lb 	$t5, X
+	beq     $t8, $t5, GOOD
+	lb 	$t5, Y
+	beq     $t8, $t5, GOOD
+	lb 	$t5, Z
+	beq     $t8, $t5, GOOD
 	
 	li $v0, 4
 	la $a0, ERROR
