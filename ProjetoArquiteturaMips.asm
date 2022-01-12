@@ -187,7 +187,7 @@ LOOP_GAME:
 
 
 LOOP_RANDOM:
-	beq $t0, $t2, CHECK_REPEATED_CODE
+	beq $t0, $t2, CHECK_SIZE_CODES
 
 	li $a1, 24
 	li $v0, 42         		 # Service 42, random int
@@ -703,13 +703,21 @@ COLORZ:
 	
 	j COLORZ
 
-CHECK_REPEATED_CODE:
+CHECK_SIZE_CODES:
 
 	li $t0, 0
+	li $t1, 0
+	li $t7, 0
 	li $t8, 0
-	li $t6, 0
+
+	slt $t7, $t5, $t2
+	beq $t7, 1, PRINT_LOOP_RANDOM
+
+
+CHECK_REPEATED_CODE:
 
 	move $t5, $t2
+	
 	addi $t5, $t5, 1
 	
 	la $s3, CODE
@@ -1303,7 +1311,7 @@ compare_e:
      lb      $t2,($s2)                  # get next char from str1
      lb      $t3,($s3)                  # get next char from str2
      
-     bne     $t2,$t3, NUMBER_DIGITS_CODE              # are they different? if yes, fly
+     bne     $t2,$t3, ASK_CHARS_STRING              # are they different? if yes, fly
 
      beq     $t2,$zero, END             # at EOS? yes, fly (strings equal)
 
