@@ -65,7 +65,7 @@ aleatória  da  nova  sequência  deverá  contemplar  os  elementos  desse  alf
 combinações inseridas pelo jogador irão também usar elementos deste mesmo alfabeto. 
 A parametrização do alfabeto, a semelhança da alínea anterior só pode ser feita no início 
 do jogo.
-(EM PRINCIPIO FEITO)
+(FEITO)
  
 C.  (20 pontos) O  programa  deve  ser  capaz,  usando  o  Bitmap  display,  de  gerar  a  grelha  de 
 dimensão MxN. Deve desenhar e apresentar a sequência de cores de cada jogador nesta 
@@ -74,6 +74,6 @@ poderão  colocar  uma  cor  aleatória  da  vossa  escolha  para  cada  um  dos
 Relembro que no jogo original é assinalada as peças com cor correta na posição certa 
 com cor vermelhas (uma por cada), peças com cor correta mas em posição erradas com 
 cor branca (uma por cada).
-(TIRAR DUVIDA AO VIANA MAS EM PRINCIPIO TB JA FEITO)
+(FALTA)
 
 :))
