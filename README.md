@@ -75,5 +75,3 @@ Relembro que no jogo original é assinalada as peças com cor correta na posiç�
 com cor vermelhas (uma por cada), peças com cor correta mas em posição erradas com 
 cor branca (uma por cada).
 (FALTA)
-
-:))
