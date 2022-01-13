@@ -74,4 +74,4 @@ poderão  colocar  uma  cor  aleatória  da  vossa  escolha  para  cada  um  dos
 Relembro que no jogo original é assinalada as peças com cor correta na posição certa 
 com cor vermelhas (uma por cada), peças com cor correta mas em posição erradas com 
 cor branca (uma por cada).
-(FALTA)
+(FALTA ACHO EU)
